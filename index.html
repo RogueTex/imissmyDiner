@@ -19,6 +19,7 @@
         <p class="eyebrow">Since 1954, Open Before Sunrise</p>
         <h1>I Miss My Diner</h1>
         <p class="tagline">Pull up a stool. Coffee's on.</p>
+        <button id="shortcutHelpBtn" class="preset-btn help-btn" type="button">Shortcuts</button>
       </header>
 
       <section class="hero" aria-label="Illustrated diner scene">
@@ -105,6 +106,19 @@
 
       <section class="mixer" aria-label="Sound mixer channels" id="mixerGrid"></section>
     </main>
+
+    <dialog id="shortcutDialog" class="shortcut-dialog" aria-label="Keyboard shortcuts">
+      <h2>Keyboard Shortcuts</h2>
+      <ul>
+        <li><kbd>Space</kbd> Toggle Open / Closed</li>
+        <li><kbd>1</kbd> Early Bird preset</li>
+        <li><kbd>2</kbd> Sunday Rush preset</li>
+        <li><kbd>3</kbd> Rainy Tuesday preset</li>
+        <li><kbd>M</kbd> Mute / Restore master volume</li>
+        <li><kbd>?</kbd> Open/close this help panel</li>
+      </ul>
+      <button id="closeShortcutDialog" class="preset-btn" type="button">Back to Booth</button>
+    </dialog>
 
     <footer class="control-bar">
       <div class="door-sign" id="doorSign" role="status" aria-live="polite" aria-label="Closed">
