@@ -116,6 +116,42 @@ h1 {
   justify-content: center;
 }
 
+.custom-preset-wrap {
+  margin: 0 0 1rem;
+  padding: 0.8rem;
+  border: 2px dashed rgba(200, 16, 46, 0.45);
+  border-radius: 12px;
+  background: rgba(255, 248, 231, 0.84);
+}
+
+.custom-preset-label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.custom-preset-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.custom-preset-row:last-child {
+  margin-bottom: 0;
+}
+
+.custom-preset-input,
+.custom-preset-select {
+  flex: 1;
+  border: 2px solid rgba(74, 74, 74, 0.35);
+  border-radius: 10px;
+  padding: 0.48rem 0.6rem;
+  background: #fffef8;
+  font: 600 0.86rem/1.2 "Manrope", sans-serif;
+}
+
 .preset-btn {
   border: 2px solid var(--diner-red);
   background: #fff7df;
@@ -126,6 +162,11 @@ h1 {
   cursor: pointer;
   box-shadow: 0 3px 0 rgba(200, 16, 46, 0.27);
   transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.2s ease;
+}
+
+.danger-btn {
+  border-color: #8f1128;
+  background: #ffe3df;
 }
 
 .preset-btn:hover,

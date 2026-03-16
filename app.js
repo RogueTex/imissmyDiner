@@ -48,12 +48,18 @@ const mixerGrid = document.getElementById("mixerGrid");
 const masterSlider = document.getElementById("masterVolume");
 const powerToggle = document.getElementById("powerToggle");
 const doorSign = document.getElementById("doorSign");
+const customPresetNameInput = document.getElementById("customPresetName");
+const customPresetSelect = document.getElementById("customPresetSelect");
+const saveCustomPresetBtn = document.getElementById("saveCustomPreset");
+const applyCustomPresetBtn = document.getElementById("applyCustomPreset");
+const deleteCustomPresetBtn = document.getElementById("deleteCustomPreset");
 
 const settings = loadSettings();
 let audioEngine;
 let isPlaying = false;
 
 renderMixer();
+renderCustomPresets();
 applyMasterToUi(settings.masterVolume);
 wireControls();
 
@@ -61,6 +67,7 @@ function loadSettings() {
   const defaults = {
     masterVolume: 70,
     channelVolumes: Object.fromEntries(channels.map((ch) => [ch.id, ch.defaultVolume])),
+    customPresets: {},
   };
 
   try {
@@ -73,6 +80,7 @@ function loadSettings() {
         ...defaults.channelVolumes,
         ...(parsed.channelVolumes || {}),
       },
+      customPresets: parsed.customPresets || {},
     };
   } catch {
     return defaults;
@@ -134,14 +142,25 @@ function wireControls() {
     button.addEventListener("click", () => applyPreset(button.dataset.preset));
   });
 
+  saveCustomPresetBtn.addEventListener("click", saveCurrentAsCustomPreset);
+  applyCustomPresetBtn.addEventListener("click", () => {
+    applyCustomPresetByName(customPresetSelect.value);
+  });
+  deleteCustomPresetBtn.addEventListener("click", () => {
+    deleteCustomPresetByName(customPresetSelect.value);
+  });
+
   powerToggle.addEventListener("click", togglePower);
 }
 
 function applyPreset(presetName) {
   const preset = presets[presetName];
   if (!preset) return;
+  setMixVolumes(preset);
+}
 
-  Object.entries(preset).forEach(([channelId, value]) => {
+function setMixVolumes(mix) {
+  Object.entries(mix).forEach(([channelId, value]) => {
     const safe = clamp(value);
     settings.channelVolumes[channelId] = safe;
 
@@ -159,6 +178,43 @@ function applyPreset(presetName) {
   });
 
   persistSettings();
+}
+
+function renderCustomPresets() {
+  const names = Object.keys(settings.customPresets || {}).sort((a, b) => a.localeCompare(b));
+
+  customPresetSelect.innerHTML = names.length
+    ? names.map((name) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join("")
+    : '<option value="">No saved mixes yet</option>';
+
+  const hasCustom = names.length > 0;
+  customPresetSelect.disabled = !hasCustom;
+  applyCustomPresetBtn.disabled = !hasCustom;
+  deleteCustomPresetBtn.disabled = !hasCustom;
+}
+
+function saveCurrentAsCustomPreset() {
+  const name = customPresetNameInput.value.trim().slice(0, 32);
+  if (!name) return;
+
+  settings.customPresets[name] = { ...settings.channelVolumes };
+  persistSettings();
+  renderCustomPresets();
+  customPresetSelect.value = name;
+  customPresetNameInput.value = "";
+}
+
+function applyCustomPresetByName(name) {
+  const preset = settings.customPresets[name];
+  if (!preset) return;
+  setMixVolumes(preset);
+}
+
+function deleteCustomPresetByName(name) {
+  if (!name || !settings.customPresets[name]) return;
+  delete settings.customPresets[name];
+  persistSettings();
+  renderCustomPresets();
 }
 
 async function togglePower() {
@@ -206,6 +262,15 @@ function applyMasterToUi(value) {
 
 function clamp(value) {
   return Math.max(0, Math.min(100, Math.round(value)));
+}
+
+function escapeHtml(value) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
 
 class DinerAudioEngine {
