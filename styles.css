@@ -156,6 +156,10 @@ h1 {
     0 14px 22px rgba(0, 0, 0, 0.14);
 }
 
+.sound-card-unavailable {
+  opacity: 0.6;
+}
+
 .sound-title {
   display: flex;
   align-items: center;
