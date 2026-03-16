@@ -1,0 +1,12 @@
+{
+  "name": "imissmydiner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "I Miss My Diner smoke tests",
+  "scripts": {
+    "test:smoke": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.2"
+  }
+}
