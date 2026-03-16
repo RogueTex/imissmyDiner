@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I Miss My Diner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="sunbeams" aria-hidden="true"></div>
+    <main class="app-shell">
+      <header class="masthead">
+        <p class="eyebrow">Since 1954, Open Before Sunrise</p>
+        <h1>I Miss My Diner</h1>
+        <p class="tagline">Pull up a stool. Coffee's on.</p>
+      </header>
+
+      <section class="hero" aria-label="Illustrated diner scene">
+        <svg viewBox="0 0 1200 430" class="diner-illustration" role="img" aria-label="Diner counter with stools, pie dome, coffee mug and neon sign">
+          <defs>
+            <linearGradient id="windowGlow" x1="0" x2="1">
+              <stop offset="0%" stop-color="#f7df9d" stop-opacity="0.8" />
+              <stop offset="100%" stop-color="#f5e6c8" stop-opacity="0.2" />
+            </linearGradient>
+            <linearGradient id="chrome" x1="0" x2="1">
+              <stop offset="0%" stop-color="#f4f4f4" />
+              <stop offset="50%" stop-color="#c7c7c7" />
+              <stop offset="100%" stop-color="#f8f8f8" />
+            </linearGradient>
+          </defs>
+
+          <rect x="0" y="0" width="1200" height="430" fill="#f9f2df" />
+          <rect x="760" y="32" width="360" height="180" rx="14" fill="#223042" stroke="#D9D9D9" stroke-width="8" />
+          <rect x="782" y="54" width="315" height="138" fill="url(#windowGlow)" />
+          <g class="blinds" opacity="0.5">
+            <rect x="782" y="62" width="315" height="8" fill="#f5e6c8" />
+            <rect x="782" y="86" width="315" height="8" fill="#f5e6c8" />
+            <rect x="782" y="110" width="315" height="8" fill="#f5e6c8" />
+            <rect x="782" y="134" width="315" height="8" fill="#f5e6c8" />
+            <rect x="782" y="158" width="315" height="8" fill="#f5e6c8" />
+          </g>
+
+          <g class="neon-sign" transform="translate(838 78)">
+            <rect x="0" y="0" width="205" height="88" rx="10" fill="#1b2533" stroke="#D9D9D9" stroke-width="5" />
+            <text x="102.5" y="56" text-anchor="middle" fill="#F2C94C" font-size="44" font-family="'Zilla Slab', serif">OPEN</text>
+          </g>
+
+          <rect x="0" y="285" width="1200" height="145" fill="#111" opacity="0.07" />
+          <rect x="0" y="286" width="1200" height="18" fill="#C8102E" />
+          <rect x="0" y="304" width="1200" height="90" fill="#4A4A4A" />
+          <rect x="0" y="392" width="1200" height="38" fill="url(#chrome)" />
+
+          <g class="stools" fill="#c8102e">
+            <ellipse cx="170" cy="275" rx="74" ry="30" />
+            <ellipse cx="400" cy="275" rx="74" ry="30" />
+            <ellipse cx="630" cy="275" rx="74" ry="30" />
+          </g>
+          <g stroke="#8e8e8e" stroke-width="12" fill="none">
+            <line x1="170" y1="286" x2="170" y2="392" />
+            <line x1="400" y1="286" x2="400" y2="392" />
+            <line x1="630" y1="286" x2="630" y2="392" />
+          </g>
+
+          <g class="pie-dome" transform="translate(940 255)">
+            <ellipse cx="95" cy="15" rx="120" ry="15" fill="#d6d6d6" />
+            <ellipse cx="95" cy="-18" rx="88" ry="35" fill="#f2c94c" opacity="0.45" />
+            <path d="M8 15 A88 35 0 0 1 182 15" fill="none" stroke="#d9d9d9" stroke-width="6" />
+          </g>
+
+          <g transform="translate(560 245)">
+            <rect x="0" y="0" width="88" height="58" rx="8" fill="#f8f8f8" stroke="#b8b8b8" stroke-width="4" />
+            <path d="M88 13 h17 a14 14 0 0 1 0 30 h-17" fill="none" stroke="#b8b8b8" stroke-width="4" />
+            <g class="steam">
+              <path d="M16 -6 C 8 -32, 28 -40, 18 -68" />
+              <path d="M38 -10 C 28 -34, 51 -44, 43 -71" />
+              <path d="M62 -8 C 50 -32, 74 -41, 64 -69" />
+            </g>
+          </g>
+        </svg>
+      </section>
+
+      <section class="preset-wrap" aria-label="Mood presets">
+        <button class="preset-btn" data-preset="earlyBird">Early Bird</button>
+        <button class="preset-btn" data-preset="sundayRush">Sunday Rush</button>
+        <button class="preset-btn" data-preset="rainyTuesday">Rainy Tuesday</button>
+      </section>
+
+      <section class="mixer" aria-label="Sound mixer channels" id="mixerGrid"></section>
+    </main>
+
+    <footer class="control-bar">
+      <div class="door-sign" id="doorSign" aria-live="polite">
+        <span class="front">OPEN</span>
+        <span class="back">CLOSED</span>
+      </div>
+
+      <button id="powerToggle" class="power-btn" type="button" aria-pressed="false">Open for Business</button>
+
+      <label class="master-control" for="masterVolume">
+        <span>Master Volume</span>
+        <input type="range" id="masterVolume" min="0" max="100" value="70" />
+      </label>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
