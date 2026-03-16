@@ -258,6 +258,14 @@ h1 {
   cursor: pointer;
 }
 
+.power-btn:focus-visible,
+.preset-btn:focus-visible,
+.sound-slider:focus-visible,
+#masterVolume:focus-visible {
+  outline: 3px solid #1d4a8a;
+  outline-offset: 2px;
+}
+
 .master-control {
   display: grid;
   gap: 0.2rem;

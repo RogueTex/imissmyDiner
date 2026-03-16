@@ -180,12 +180,14 @@ async function togglePower() {
     powerToggle.textContent = "Closed";
     powerToggle.setAttribute("aria-pressed", "true");
     doorSign.classList.add("is-open");
+    doorSign.setAttribute("aria-label", "Open");
   } else {
     await audioEngine.pause();
     isPlaying = false;
     powerToggle.textContent = "Open for Business";
     powerToggle.setAttribute("aria-pressed", "false");
     doorSign.classList.remove("is-open");
+    doorSign.setAttribute("aria-label", "Closed");
   }
 }
 
