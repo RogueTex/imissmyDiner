@@ -355,6 +355,11 @@ h1 {
   font: 700 0.8rem/1 "Manrope", sans-serif;
 }
 
+.shortcut-dialog a {
+  color: #7b1023;
+  font-weight: 700;
+}
+
 @keyframes steamUp {
   0% {
     opacity: 0;

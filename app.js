@@ -56,6 +56,9 @@ const deleteCustomPresetBtn = document.getElementById("deleteCustomPreset");
 const shortcutHelpBtn = document.getElementById("shortcutHelpBtn");
 const shortcutDialog = document.getElementById("shortcutDialog");
 const closeShortcutDialog = document.getElementById("closeShortcutDialog");
+const creditsBtn = document.getElementById("creditsBtn");
+const creditsDialog = document.getElementById("creditsDialog");
+const closeCreditsDialog = document.getElementById("closeCreditsDialog");
 
 const settings = loadSettings();
 let audioEngine;
@@ -142,7 +145,7 @@ function wireControls() {
     }
   });
 
-  document.querySelectorAll(".preset-btn").forEach((button) => {
+  document.querySelectorAll("[data-preset]").forEach((button) => {
     button.addEventListener("click", () => applyPreset(button.dataset.preset));
   });
 
@@ -157,6 +160,8 @@ function wireControls() {
   powerToggle.addEventListener("click", togglePower);
   shortcutHelpBtn.addEventListener("click", toggleShortcutDialog);
   closeShortcutDialog.addEventListener("click", toggleShortcutDialog);
+  creditsBtn.addEventListener("click", toggleCreditsDialog);
+  closeCreditsDialog.addEventListener("click", toggleCreditsDialog);
   window.addEventListener("keydown", handleKeyboardShortcuts);
 }
 
@@ -323,6 +328,12 @@ function handleKeyboardShortcuts(event) {
   if (event.key === "?") {
     event.preventDefault();
     toggleShortcutDialog();
+    return;
+  }
+
+  if (event.key.toLowerCase() === "c") {
+    event.preventDefault();
+    toggleCreditsDialog();
   }
 }
 
@@ -346,6 +357,14 @@ function toggleShortcutDialog() {
     shortcutDialog.close();
   } else {
     shortcutDialog.showModal();
+  }
+}
+
+function toggleCreditsDialog() {
+  if (creditsDialog.open) {
+    creditsDialog.close();
+  } else {
+    creditsDialog.showModal();
   }
 }
 

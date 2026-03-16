@@ -20,6 +20,7 @@
         <h1>I Miss My Diner</h1>
         <p class="tagline">Pull up a stool. Coffee's on.</p>
         <button id="shortcutHelpBtn" class="preset-btn help-btn" type="button">Shortcuts</button>
+        <button id="creditsBtn" class="preset-btn help-btn" type="button">Audio Credits</button>
       </header>
 
       <section class="hero" aria-label="Illustrated diner scene">
@@ -118,6 +119,17 @@
         <li><kbd>?</kbd> Open/close this help panel</li>
       </ul>
       <button id="closeShortcutDialog" class="preset-btn" type="button">Back to Booth</button>
+    </dialog>
+    <dialog id="creditsDialog" class="shortcut-dialog" aria-label="Audio credits and licenses">
+      <h2>Audio Credits & Licenses</h2>
+      <p>
+        Source and channel mapping: <a href="assets/audio/ATTRIBUTION.md" target="_blank" rel="noreferrer">ATTRIBUTION.md</a>
+      </p>
+      <ul>
+        <li>Most channels use Public Domain source recordings from Wikimedia Commons.</li>
+        <li>Rain channel uses CC BY-SA 3.0, attribution and share-alike terms apply.</li>
+      </ul>
+      <button id="closeCreditsDialog" class="preset-btn" type="button">Back to Booth</button>
     </dialog>
 
     <footer class="control-bar">
