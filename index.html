@@ -90,6 +90,18 @@
         <button class="preset-btn" data-preset="sundayRush">Sunday Rush</button>
         <button class="preset-btn" data-preset="rainyTuesday">Rainy Tuesday</button>
       </section>
+      <section class="custom-preset-wrap" aria-label="Custom presets">
+        <label class="custom-preset-label" for="customPresetName">Save This Mix</label>
+        <div class="custom-preset-row">
+          <input id="customPresetName" class="custom-preset-input" type="text" maxlength="32" placeholder="e.g. Late Shift Calm" />
+          <button id="saveCustomPreset" class="preset-btn" type="button">Save</button>
+        </div>
+        <div class="custom-preset-row">
+          <select id="customPresetSelect" class="custom-preset-select" aria-label="Saved custom presets"></select>
+          <button id="applyCustomPreset" class="preset-btn" type="button">Apply</button>
+          <button id="deleteCustomPreset" class="preset-btn danger-btn" type="button">Delete</button>
+        </div>
+      </section>
 
       <section class="mixer" aria-label="Sound mixer channels" id="mixerGrid"></section>
     </main>
