@@ -69,6 +69,10 @@ h1 {
   font-size: clamp(0.95rem, 2.2vw, 1.2rem);
 }
 
+.help-btn {
+  margin-top: 0.7rem;
+}
+
 .hero {
   border: 3px solid var(--diner-red);
   background: rgba(255, 252, 245, 0.92);
@@ -312,6 +316,43 @@ h1 {
   gap: 0.2rem;
   font-size: 0.87rem;
   font-weight: 700;
+}
+
+.shortcut-dialog {
+  width: min(480px, 92vw);
+  border: 3px solid var(--diner-red);
+  border-radius: 14px;
+  background: #fff6e2;
+  color: var(--ink);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+}
+
+.shortcut-dialog::backdrop {
+  background: rgba(26, 19, 13, 0.5);
+}
+
+.shortcut-dialog h2 {
+  margin: 0 0 0.65rem;
+  font-family: "Zilla Slab", serif;
+  color: var(--diner-red);
+}
+
+.shortcut-dialog ul {
+  margin: 0 0 0.9rem;
+  padding-left: 1.05rem;
+}
+
+.shortcut-dialog li {
+  margin-bottom: 0.42rem;
+}
+
+.shortcut-dialog kbd {
+  background: #f2ead6;
+  border: 1px solid rgba(74, 74, 74, 0.35);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 0.08rem 0.35rem;
+  font: 700 0.8rem/1 "Manrope", sans-serif;
 }
 
 @keyframes steamUp {

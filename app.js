@@ -53,10 +53,14 @@ const customPresetSelect = document.getElementById("customPresetSelect");
 const saveCustomPresetBtn = document.getElementById("saveCustomPreset");
 const applyCustomPresetBtn = document.getElementById("applyCustomPreset");
 const deleteCustomPresetBtn = document.getElementById("deleteCustomPreset");
+const shortcutHelpBtn = document.getElementById("shortcutHelpBtn");
+const shortcutDialog = document.getElementById("shortcutDialog");
+const closeShortcutDialog = document.getElementById("closeShortcutDialog");
 
 const settings = loadSettings();
 let audioEngine;
 let isPlaying = false;
+let previousMasterVolume = settings.masterVolume || 70;
 
 renderMixer();
 renderCustomPresets();
@@ -151,6 +155,9 @@ function wireControls() {
   });
 
   powerToggle.addEventListener("click", togglePower);
+  shortcutHelpBtn.addEventListener("click", toggleShortcutDialog);
+  closeShortcutDialog.addEventListener("click", toggleShortcutDialog);
+  window.addEventListener("keydown", handleKeyboardShortcuts);
 }
 
 function applyPreset(presetName) {
@@ -271,6 +278,75 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
+}
+
+function handleKeyboardShortcuts(event) {
+  const target = event.target;
+  const typingContext =
+    target instanceof HTMLInputElement ||
+    target instanceof HTMLTextAreaElement ||
+    target instanceof HTMLSelectElement ||
+    target?.isContentEditable;
+
+  if (typingContext) return;
+
+  if (event.key === " " || event.code === "Space") {
+    event.preventDefault();
+    togglePower();
+    return;
+  }
+
+  if (event.key === "1") {
+    event.preventDefault();
+    applyPreset("earlyBird");
+    return;
+  }
+
+  if (event.key === "2") {
+    event.preventDefault();
+    applyPreset("sundayRush");
+    return;
+  }
+
+  if (event.key === "3") {
+    event.preventDefault();
+    applyPreset("rainyTuesday");
+    return;
+  }
+
+  if (event.key.toLowerCase() === "m") {
+    event.preventDefault();
+    toggleMuteMaster();
+    return;
+  }
+
+  if (event.key === "?") {
+    event.preventDefault();
+    toggleShortcutDialog();
+  }
+}
+
+function toggleMuteMaster() {
+  if (settings.masterVolume > 0) {
+    previousMasterVolume = settings.masterVolume;
+    settings.masterVolume = 0;
+  } else {
+    settings.masterVolume = Math.max(1, previousMasterVolume);
+  }
+
+  applyMasterToUi(settings.masterVolume);
+  persistSettings();
+  if (audioEngine) {
+    audioEngine.setMasterVolume(settings.masterVolume / 100);
+  }
+}
+
+function toggleShortcutDialog() {
+  if (shortcutDialog.open) {
+    shortcutDialog.close();
+  } else {
+    shortcutDialog.showModal();
+  }
 }
 
 class DinerAudioEngine {
